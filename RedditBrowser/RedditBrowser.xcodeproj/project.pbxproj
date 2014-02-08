@@ -23,6 +23,9 @@
 		FA7017CF18A30AAE0047A9F7 /* RedditBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7017CE18A30AAE0047A9F7 /* RedditBrowserTests.m */; };
 		FA7017DA18A30E9E0047A9F7 /* FrontPageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7017D918A30E9E0047A9F7 /* FrontPageTableViewController.m */; };
 		FA7017DD18A30FF20047A9F7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7017DC18A30FF20047A9F7 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FA8CFECB18A3E64F00144F53 /* RedditItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8CFECA18A3E64F00144F53 /* RedditItem.m */; };
+		FA8CFECF18A3E8BB00144F53 /* RedditRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8CFECE18A3E8BB00144F53 /* RedditRequest.m */; };
+		FAF2E71E18A61CB700660232 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF2E71D18A61CB700660232 /* MainPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,12 @@
 		FA7017D918A30E9E0047A9F7 /* FrontPageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrontPageTableViewController.m; sourceTree = "<group>"; };
 		FA7017DB18A30FF20047A9F7 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		FA7017DC18A30FF20047A9F7 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		FA8CFEC918A3E64F00144F53 /* RedditItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedditItem.h; sourceTree = "<group>"; };
+		FA8CFECA18A3E64F00144F53 /* RedditItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedditItem.m; sourceTree = "<group>"; };
+		FA8CFECD18A3E8BB00144F53 /* RedditRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedditRequest.h; sourceTree = "<group>"; };
+		FA8CFECE18A3E8BB00144F53 /* RedditRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedditRequest.m; sourceTree = "<group>"; };
+		FAF2E71C18A61CB700660232 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		FAF2E71D18A61CB700660232 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,11 +126,15 @@
 		FA7017A618A30AAE0047A9F7 /* RedditBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				FA8CFECC18A3E74300144F53 /* Connection */,
+				FA8CFEC818A3E4C500144F53 /* RedditStuff */,
 				FA7017DE18A30FF70047A9F7 /* XML */,
 				FA7017AF18A30AAE0047A9F7 /* AppDelegate.h */,
 				FA7017B018A30AAE0047A9F7 /* AppDelegate.m */,
 				FA7017B218A30AAE0047A9F7 /* Main_iPhone.storyboard */,
 				FA7017B518A30AAE0047A9F7 /* Main_iPad.storyboard */,
+				FAF2E71C18A61CB700660232 /* MainPageViewController.h */,
+				FAF2E71D18A61CB700660232 /* MainPageViewController.m */,
 				FA7017D818A30E9E0047A9F7 /* FrontPageTableViewController.h */,
 				FA7017D918A30E9E0047A9F7 /* FrontPageTableViewController.m */,
 				FA7017BB18A30AAE0047A9F7 /* Images.xcassets */,
@@ -166,6 +179,24 @@
 				FA7017DC18A30FF20047A9F7 /* GDataXMLNode.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		FA8CFEC818A3E4C500144F53 /* RedditStuff */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CFEC918A3E64F00144F53 /* RedditItem.h */,
+				FA8CFECA18A3E64F00144F53 /* RedditItem.m */,
+			);
+			name = RedditStuff;
+			sourceTree = "<group>";
+		};
+		FA8CFECC18A3E74300144F53 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CFECD18A3E8BB00144F53 /* RedditRequest.h */,
+				FA8CFECE18A3E8BB00144F53 /* RedditRequest.m */,
+			);
+			name = Connection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7017DA18A30E9E0047A9F7 /* FrontPageTableViewController.m in Sources */,
+				FA8CFECF18A3E8BB00144F53 /* RedditRequest.m in Sources */,
+				FA8CFECB18A3E64F00144F53 /* RedditItem.m in Sources */,
 				FA7017DD18A30FF20047A9F7 /* GDataXMLNode.m in Sources */,
+				FAF2E71E18A61CB700660232 /* MainPageViewController.m in Sources */,
 				FA7017B118A30AAE0047A9F7 /* AppDelegate.m in Sources */,
 				FA7017AD18A30AAE0047A9F7 /* main.m in Sources */,
 			);

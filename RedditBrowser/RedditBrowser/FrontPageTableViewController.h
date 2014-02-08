@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RedditRequest.h"
 
-@interface FrontPageTableViewController : UITableViewController <NSURLConnectionDelegate>
+@interface FrontPageTableViewController : UITableViewController <NSURLConnectionDelegate, RedditRequestDelegate>
 
-@property (strong, nonatomic) NSMutableData *mutableData;
 @property (strong, nonatomic) NSMutableArray *titleCollection;
+@property (strong, nonatomic) NSString *subredditName;
 
 @end

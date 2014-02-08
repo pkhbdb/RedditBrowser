@@ -8,6 +8,8 @@
 
 #import "FrontPageTableViewController.h"
 #import "GDataXMLNode.h"
+#import "AppDelegate.h"
+#import "RedditItem.h"
 
 @interface FrontPageTableViewController ()
 
@@ -15,7 +17,7 @@
 
 @implementation FrontPageTableViewController
 
-@synthesize mutableData, titleCollection;
+@synthesize titleCollection, subredditName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,19 +32,15 @@
 {
     [super viewDidLoad];
     
-    titleCollection = [[NSMutableArray alloc] init];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    appDelegate.redditRequest.delegate = self;
+    
+    [appDelegate.redditRequest forgeRequestWithUrlString:subredditName];
     
     self.tableView.dataSource = self;
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.reddit.com/r/assettocorsa.xml"]];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-
-    
-    
-    
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -72,13 +70,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"frontPageCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [titleCollection objectAtIndex:indexPath.row];
+    if (titleCollection != nil) {
+        RedditItem *item = (RedditItem *)[titleCollection objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = item.title;
+    }
     
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark RedditRequest delegate methods
+
+-(void)requestDidReceiveResultArray:(NSArray *)resultArray
+{
+    titleCollection = [[NSMutableArray alloc] init];
+    
+    titleCollection = [resultArray copy];
+    
+    [self.tableView reloadData];
+    
+    
+}
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -131,46 +154,6 @@
 
  */
 
-#pragma mark NSURLConnection Delegate Methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
-    mutableData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the instance variable you declared
-    [mutableData appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSError *error;
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:mutableData
-                                                           options:0 error:&error];
-    
-    NSArray *array = [[[doc.rootElement elementsForName:@"channel"] objectAtIndex:0] elementsForName:@"item"];
-    
-    for (GDataXMLElement *element in array) {
-        [titleCollection addObject:[[[element elementsForName:@"title"] objectAtIndex:0] stringValue]];
-    }
-    
-    [self.tableView reloadData];
-    
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // The request has failed for some reason!
-    // Check the error var
-}
 
 @end
